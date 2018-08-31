@@ -9,6 +9,7 @@ import retrofit2.*;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class EarthquakeController {
 
@@ -71,7 +72,9 @@ public class EarthquakeController {
 	public void showTopFive(List<Earthquake> earthquakes, JLabel [] mag, JLabel [] loc) {
 		for(int i = 0; i < earthquakes.size(); i ++)
 		{
-			mag[i].setText(earthquakes.get(i).getMagnitude());
+			String magn = String.valueOf(earthquakes.get(i).getMagnitude());
+			mag[i].setText(magn);
+			loc[i].setText(earthquakes.get(i).getProperties().getPlace());
 		}
 	}
 }
