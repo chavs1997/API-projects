@@ -1,6 +1,7 @@
 package forer.maze;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class MazeView extends JFrame {
     public MazeView(int length) {
@@ -9,7 +10,7 @@ public class MazeView extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         MazePanel maze = new MazePanel(length);
-
+        setBackground(Color.BLUE);
         add(maze);
     }
 
