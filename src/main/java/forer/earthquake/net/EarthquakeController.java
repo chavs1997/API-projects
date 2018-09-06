@@ -30,7 +30,7 @@ public class EarthquakeController {
 	}*/
 
 	public void refreshData() {
-		requestEarthquakeFeed(service.getAllHour(), view.getHourMagLabel(), view.getHourLocLabel());
+		requestEarthquakeFeed(service.getAllDay(), view.getHourMagLabel(), view.getHourLocLabel());
 	}
 
 	/*public void requestDay() {
