@@ -99,7 +99,10 @@ public class EarthquakeView extends JFrame {
 		Injector injector = Guice.createInjector(new EarthquakeModule());
 		EarthquakeView view = injector.getInstance(EarthquakeView.class);
 		EarthquakeController controller = injector.getInstance(EarthquakeController.class);
-		controller.refreshData();
+
+        Timer timer = new Timer(30000, (event) -> controller.refreshData());
+        timer.setInitialDelay(0);
+        timer.start();
 
 		view.setVisible(true);
 	}
