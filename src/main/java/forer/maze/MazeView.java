@@ -6,11 +6,10 @@ import java.awt.*;
 public class MazeView extends JFrame {
     public MazeView(int length) {
         setTitle("Maze");
-        setSize(600, 600);
+        setSize(800, 800);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         MazePanel maze = new MazePanel(length);
-        setBackground(Color.BLUE);
         add(maze);
     }
 

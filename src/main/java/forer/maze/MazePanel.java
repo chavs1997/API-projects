@@ -16,12 +16,13 @@ public class MazePanel extends JComponent {
     public void paintComponent(Graphics g){
 
         Graphics2D g2 = (Graphics2D) g;
-        BasicStroke stroke = new BasicStroke(50);
+        BasicStroke stroke = new BasicStroke(200);
         g2.setStroke(stroke);
+        g2.setColor(Color.BLUE);
         int j = 0;
 
         for (int i = 0; i < length * length; i++) {
-            g2.drawLine(maze.getStart(i, j)* (500/length) +100,
+            g2.drawLine(maze.getStart(i, j)* (500/length) + 100,
                     maze.getStart(i,j+1) * (500/length) + 100,
                     maze.getEnd(i, j) * (500/length) + 100,
                     maze.getEnd(i, j+1) * (500/length) + 100);
