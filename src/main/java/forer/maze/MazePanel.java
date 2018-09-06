@@ -22,10 +22,10 @@ public class MazePanel extends JComponent {
         int j = 0;
 
         for (int i = 0; i < length * length; i++) {
-            g2.drawLine(maze.getStart(i, j)* (500/length) + 100,
-                    maze.getStart(i,j+1) * (500/length) + 100,
-                    maze.getEnd(i, j) * (500/length) + 100,
-                    maze.getEnd(i, j+1) * (500/length) + 100);
+            g2.drawLine(maze.getStart(i, j)* (500/length),
+                    maze.getStart(i,j+1) * (500/length),
+                    maze.getEnd(i, j) * (500/length),
+                    maze.getEnd(i, j+1) * (500/length));
         }
     }
 }

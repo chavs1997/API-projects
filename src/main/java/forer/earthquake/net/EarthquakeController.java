@@ -30,7 +30,7 @@ public class EarthquakeController {
 	}*/
 
 	public void refreshData() {
-		requestEarthquakeFeed(service.getAllHour(), view.getHourMagLabel(), view.getHourLocLabel());
+		requestEarthquakeFeed(service.getAllDay(), view.getDayMagLabel(), view.getDayLocLabel());
 	}
 
 	/*public void requestDay() {
@@ -59,7 +59,7 @@ public class EarthquakeController {
 				EarthquakeFeed feed = response.body();
 				List<Earthquake> earthquakes = feed.getFeatures()
 						.stream()
-						.filter(earthquake -> earthquake.getProperties().getMag() >= 0.25)
+						.filter(earthquake -> earthquake.getProperties().getMag() >= 3)
 						.sorted(Comparator.comparing(Earthquake :: getMagnitude).reversed())
 						.limit(5)
 						.collect(Collectors.toList());

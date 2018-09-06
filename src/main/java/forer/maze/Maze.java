@@ -6,7 +6,7 @@ public class Maze {
 
     private int[][] start;
     private int[][] end;
-    private boolean[][] grid;
+    private boolean[][] visited;
     private int length;
     private Random rand;
     private int startCount = 0;
@@ -14,7 +14,7 @@ public class Maze {
 
     public Maze(int length) {
         this.length = length;
-        grid = new boolean[length][length];
+        visited = new boolean[length][length];
         start = new int[length * length][2];
         end = new int[length * length][2];
         end[length * length - 1][0] = -99;
@@ -22,7 +22,7 @@ public class Maze {
         int x = rand.nextInt(length);
         int y = rand.nextInt(length);
 
-        solve(x, y);
+        generate(x, y);
 
     }
 
@@ -36,10 +36,10 @@ public class Maze {
     }
 
 
-    private void solve(int x, int y) {
-        grid[x][y] = true;
+    private void generate(int x, int y) {
+        visited[x][y] = true;
         int[] neighborLoc = chooseNeighbor(x, y);
-        boolean neighbor = grid[neighborLoc[0]][neighborLoc[1]];
+        boolean neighbor = visited[neighborLoc[0]][neighborLoc[1]];
         if (!neighbor) {
             start[startCount][0] = x;
             start[startCount][1] = y;
@@ -47,9 +47,10 @@ public class Maze {
             end[endCount][1] = neighborLoc[1];
             startCount++;
             endCount++;
+
         }
-        if (end[(length * length) - 1][0] == -99) {
-            solve(neighborLoc[0], neighborLoc[1]);
+       if (end[(length * length) - 1][0] == -99) {
+           generate(neighborLoc[0], neighborLoc[1]);
         }
     }
 
