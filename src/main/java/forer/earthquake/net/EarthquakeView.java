@@ -84,13 +84,7 @@ public class EarthquakeView extends JFrame {
 		constraint.gridy = 5;
 		mainPanel.add(locFive, constraint);
 
-		// JButton button = new JButton("Refresh");
-		// button.addActionListener(e -> {
-		// controller.refreshData();
-		// });
-
 		homePanel.add(mainPanel);
-		// homePanel.add(button);
 		add(homePanel);
 	}
 
