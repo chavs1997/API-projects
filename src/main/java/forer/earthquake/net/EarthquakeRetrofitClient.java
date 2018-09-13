@@ -1,3 +1,4 @@
+/*
 package forer.earthquake.net;
 
 import java.io.IOException;
@@ -10,7 +11,8 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class EarthquakeRetrofitClient {
-	public static void main(String[] args) throws IOException {
+	*/
+/*public static void main(String[] args) throws IOException {
 
 		Retrofit retrofit = new Retrofit.Builder().baseUrl("https://earthquake.usgs.gov")
 				.addConverterFactory(GsonConverterFactory.create()).build();
@@ -32,8 +34,10 @@ public class EarthquakeRetrofitClient {
 				System.exit(0);
 			}
 
-		});
+		});*//*
+
 
 	}
 	
 	}
+*/
