@@ -8,10 +8,7 @@ public class Maze {
     private int[][] end;
     private boolean[][] grid;
     private int length;
-    Random rand;
-    private boolean current;
-    private boolean neighbor;
-    private int[] neighborLoc = new int[2];
+    private Random rand;
     private int startCount = 0;
     private int endCount = 0;
 
@@ -40,11 +37,9 @@ public class Maze {
 
 
     private void solve(int x, int y) {
-        current = grid[x][y];
-        current = true;
-
-        neighborLoc = chooseNeighbor(x, y);
-        neighbor = grid[neighborLoc[0]][neighborLoc[1]];
+        grid[x][y] = true;
+        int[] neighborLoc = chooseNeighbor(x, y);
+        boolean neighbor = grid[neighborLoc[0]][neighborLoc[1]];
         if (!neighbor) {
             start[startCount][0] = x;
             start[startCount][1] = y;
@@ -65,24 +60,44 @@ public class Maze {
             char dir = directions[rand.nextInt(4)];
             switch (dir) {
                 case 'N':
-                    chosenNeighbor[0] = x;
-                    chosenNeighbor[1] = y + 1;
+                    if ((y + 1) < length) {
+                        chosenNeighbor[0] = x;
+                        chosenNeighbor[1] = y + 1;
+                    }else{
+                        chosenNeighbor[0] = x;
+                        chosenNeighbor[1] = y;
+                    }
                     break;
                 case 'S':
-                    chosenNeighbor[0] = x;
-                    chosenNeighbor[1] = y - 1;
+                    if ((y - 1) >= 0) {
+                        chosenNeighbor[0] = x;
+                        chosenNeighbor[1] = y - 1;
+                    }else{
+                        chosenNeighbor[0] = x;
+                        chosenNeighbor[1] = y;
+                    }
                     break;
                 case 'E':
-                    chosenNeighbor[0] = x + 1;
-                    chosenNeighbor[1] = y;
+                    if ((x + 1) < length) {
+                        chosenNeighbor[0] = x + 1;
+                        chosenNeighbor[1] = y;
+                    }else{
+                        chosenNeighbor[0] = x;
+                        chosenNeighbor[1] = y;
+                    }
                     break;
                 case 'W':
-                    chosenNeighbor[0] = x - 1;
-                    chosenNeighbor[1] = y;
+                    if ((x - 1) >= 0) {
+                        chosenNeighbor[0] = x - 1;
+                        chosenNeighbor[1] = y;
+                    }else{
+                        chosenNeighbor[0] = x;
+                        chosenNeighbor[1] = y;
+                    }
                     break;
             }
         }
-        while (chosenNeighbor[0] < 0 || chosenNeighbor[1] < 0 || chosenNeighbor[0] > length || chosenNeighbor[1] > length);
+        while (chosenNeighbor[0] == x && chosenNeighbor[1] == y);
         return chosenNeighbor;
     }
 }

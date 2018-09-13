@@ -59,7 +59,7 @@ public class EarthquakeController {
 				EarthquakeFeed feed = response.body();
 				List<Earthquake> earthquakes = feed.getFeatures()
 						.stream()
-						.filter(earthquake -> earthquake.getProperties().getMag() >= 1.2)
+						.filter(earthquake -> earthquake.getProperties().getMag() >= 0.25)
 						.sorted(Comparator.comparing(Earthquake :: getMagnitude).reversed())
 						.limit(5)
 						.collect(Collectors.toList());
