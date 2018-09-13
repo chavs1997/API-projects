@@ -14,7 +14,7 @@ public class EarthquakeController {
 
 	private EarthquakeView view;
 	private USGSEarthquakeService service;
-
+    private Disposable disposable;
 	@Inject
 	public EarthquakeController(EarthquakeView view, USGSEarthquakeService service) {
 		this.view = view;
@@ -22,7 +22,7 @@ public class EarthquakeController {
 	}
 
 	public void refreshData() {
-        Disposable disposable = Observable.interval(0,30, TimeUnit.SECONDS)
+        disposable = Observable.interval(0,30, TimeUnit.SECONDS)
                 .flatMap(aLong -> service.getAllDay())
                 .map(EarthquakeFeed::getFeatures)
                 .subscribeOn(Schedulers.io())
@@ -40,6 +40,10 @@ public class EarthquakeController {
                 .limit(5)
                 .collect(Collectors.toList());
         showTopFive(earthquakes, view.getHourMagLabel(), view.getHourLocLabel());
+    }
+
+    public void stop(){
+	    disposable.dispose();
     }
 
     private void showTopFive(List<Earthquake> earthquakes, JLabel [] mag, JLabel [] loc) {
