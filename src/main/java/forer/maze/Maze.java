@@ -82,7 +82,7 @@ public class Maze {
                     break;
             }
         }
-        while (chosenNeighbor[0] < 0 || chosenNeighbor[1] < 0 || chosenNeighbor[0] > length || chosenNeighbor[1] > length);
+        while (chosenNeighbor[0] < 0 || chosenNeighbor[1] < 0 || chosenNeighbor[0] >= length || chosenNeighbor[1] >= length);
         return chosenNeighbor;
     }
 }

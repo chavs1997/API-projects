@@ -2,7 +2,7 @@ package forer.maze;
 
 import javax.swing.*;
 import java.awt.*;
-public class MazePanel extends JFrame {
+public class MazePanel extends JPanel {
 
     private int length;
     private Maze maze;
