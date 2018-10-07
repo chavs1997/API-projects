@@ -1,104 +1,216 @@
 package forer.maze;
 
 import java.util.Random;
+import java.util.Stack;
 
 public class Maze {
 
-    private int[][] start;
-    private int[][] end;
-    private boolean[][] visited;
-    private int length;
-    private Random rand;
-    private int startCount = 0;
-    private int endCount = 0;
-
-    public Maze(int length) {
-        this.length = length;
-        visited = new boolean[length][length];
-        start = new int[length * length][2];
-        end = new int[length * length][2];
-        end[length * length - 1][0] = -99;
-        rand = new Random();
-        int x = rand.nextInt(length);
-        int y = rand.nextInt(length);
-
-        generate(x, y);
-
-    }
+    public Cell[][] mazeGrid;
+    public Stack<Cell> visitedCells = new Stack();
+    Random rand = new Random();
+    int size;
 
 
-    public int getEnd(int x, int y) {
-        return end[x][y];
-    }
-
-    public int getStart(int x, int y) {
-        return start[x][y];
-    }
-
-
-    private void generate(int x, int y) {
-        visited[x][y] = true;
-        int[] neighborLoc = chooseNeighbor(x, y);
-        boolean neighbor = visited[neighborLoc[0]][neighborLoc[1]];
-        if (!neighbor) {
-            start[startCount][0] = x;
-            start[startCount][1] = y;
-            end[endCount][0] = neighborLoc[0];
-            end[endCount][1] = neighborLoc[1];
-            startCount++;
-            endCount++;
-
+    public Maze(int size) {
+        this.size = size;
+        mazeGrid = new Cell[size][size];
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                mazeGrid[i][j] = new Cell(i, j);
+                mazeGrid[i][j].setEWall(true);
+                mazeGrid[i][j].setNWall(true);
+                mazeGrid[i][j].setSWall(true);
+                mazeGrid[i][j].setWWall(true);
+            }
         }
-       if (end[(length * length) - 1][0] == -99) {
-           generate(neighborLoc[0], neighborLoc[1]);
-        }
+        generateMaze();
     }
 
-    private int[] chooseNeighbor(int x, int y) {
-        int[] chosenNeighbor = new int[2];
-        char[] directions = {'N', 'S', 'E', 'W'};
+    private void generateMaze() {
+        int row = rand.nextInt(size);
+        int col = rand.nextInt(size);
+        Cell current = mazeGrid[row][col];
+        current.setVisited(true);
         do {
-            char dir = directions[rand.nextInt(4)];
-            switch (dir) {
+            current = removeWalls(current);
+        } while (!visitedCells.isEmpty());
+
+    }
+
+    private Cell removeWalls(Cell current) {
+        Cell neighbor = chooseNeighbor(current.getRow(), current.getCol());
+        if (neighbor != null) {
+            visitedCells.push(current);
+            if (current.getRow() > neighbor.getRow()) {
+                neighbor.setSWall(false);
+                current.setNWall(false);
+                current = neighbor;
+                current.setVisited(true);
+            } else if (current.getCol() < neighbor.getCol()) {
+                current.setEWall(false);
+                neighbor.setWWall(false);
+                current = neighbor;
+                current.setVisited(true);
+            } else if (current.getRow() < neighbor.getRow()) {
+                neighbor.setNWall(false);
+                current.setSWall(false);
+                current = neighbor;
+                current.setVisited(true);
+            } else {
+                neighbor.setEWall(false);
+                current.setWWall(false);
+                current = neighbor;
+                current.setVisited(true);
+            }
+        } else {
+            current = visitedCells.pop();
+        }
+        return current;
+    }
+
+    private Cell chooseNeighbor(int row, int col) {
+
+        Cell neighbor = null;
+        char[] directions = availableDirections(row, col);
+        while (directions != null) {
+            char neighborLoc = directions[rand.nextInt(directions.length)];
+            switch (neighborLoc) {
                 case 'N':
-                    if ((y + 1) < length) {
-                        chosenNeighbor[0] = x;
-                        chosenNeighbor[1] = y + 1;
-                    }else{
-                        chosenNeighbor[0] = x;
-                        chosenNeighbor[1] = y;
-                    }
-                    break;
-                case 'S':
-                    if ((y - 1) >= 0) {
-                        chosenNeighbor[0] = x;
-                        chosenNeighbor[1] = y - 1;
-                    }else{
-                        chosenNeighbor[0] = x;
-                        chosenNeighbor[1] = y;
+                    if (!mazeGrid[row - 1][col].isVisited()) {
+                        neighbor = mazeGrid[row - 1][col];
+                        directions = null;
+                    } else {
+                        if(directions.length > 1){
+                        char[] oldDirections = directions.clone();
+                        directions = new char[oldDirections.length - 1];
+                        int count = 0;
+                        for (char dir : oldDirections) {
+                            if (dir != 'N') {
+                                directions[count] = dir;
+                                count++;
+                            }
+                        }}else{
+                            directions = null;
+                        }
                     }
                     break;
                 case 'E':
-                    if ((x + 1) < length) {
-                        chosenNeighbor[0] = x + 1;
-                        chosenNeighbor[1] = y;
-                    }else{
-                        chosenNeighbor[0] = x;
-                        chosenNeighbor[1] = y;
+                    if (!mazeGrid[row][col + 1].isVisited()) {
+                        neighbor = mazeGrid[row][col + 1];
+                        directions = null;
+                    } else {
+                        if(directions.length > 1){
+                            char[] oldDirections = directions.clone();
+                            directions = new char[oldDirections.length - 1];
+                            int count = 0;
+                            for (char dir : oldDirections) {
+                                if (dir != 'E') {
+                                    directions[count] = dir;
+                                    count++;
+                                }
+                            }}else{
+                            directions = null;
+                        }
+                    }
+                    break;
+                case 'S':
+                    if (!mazeGrid[row + 1][col].isVisited()) {
+                        neighbor = mazeGrid[row + 1][col];
+                        directions = null;
+                    } else {
+                        if(directions.length > 1){
+                            char[] oldDirections = directions.clone();
+                            directions = new char[oldDirections.length - 1];
+                            int count = 0;
+                            for (char dir : oldDirections) {
+                                if (dir != 'S') {
+                                    directions[count] = dir;
+                                    count++;
+                                }
+                            }}else{
+                            directions = null;
+                        }
                     }
                     break;
                 case 'W':
-                    if ((x - 1) >= 0) {
-                        chosenNeighbor[0] = x - 1;
-                        chosenNeighbor[1] = y;
-                    }else{
-                        chosenNeighbor[0] = x;
-                        chosenNeighbor[1] = y;
+                    if (!mazeGrid[row][col - 1].isVisited()) {
+                        neighbor = mazeGrid[row][col - 1];
+                        directions = null;
+                    } else {
+                        if(directions.length > 1){
+                            char[] oldDirections = directions.clone();
+                            directions = new char[oldDirections.length - 1];
+                            int count = 0;
+                            for (char dir : oldDirections) {
+                                if (dir != 'W') {
+                                    directions[count] = dir;
+                                    count++;
+                                }
+                            }}else{
+                            directions = null;
+                        }
                     }
                     break;
+
             }
+
         }
-        while (chosenNeighbor[0] == x && chosenNeighbor[1] == y);
-        return chosenNeighbor;
+        return neighbor;
+    }
+
+    private char[] availableDirections(int row, int col) {
+        char[] directions;
+
+        if (row == 0 && col == 0) {
+            directions = new char[2];
+            directions[0] = 'E';
+            directions[1] = 'S';
+        } else if (row == 0 && col == size - 1) {
+            directions = new char[2];
+            directions[0] = 'S';
+            directions[1] = 'W';
+        } else if (row == size - 1 && col == size - 1) {
+            directions = new char[2];
+            directions[0] = 'W';
+            directions[1] = 'N';
+        } else if (row == size - 1 && col == 0) {
+            directions = new char[2];
+            directions[0] = 'E';
+            directions[1] = 'N';
+        } else if (row == 0) {
+            directions = new char[3];
+            directions[0] = 'E';
+            directions[1] = 'S';
+            directions[2] = 'W';
+        } else if (col == 0) {
+            directions = new char[3];
+            directions[0] = 'E';
+            directions[1] = 'S';
+            directions[2] = 'N';
+
+        } else if (row == size - 1) {
+            directions = new char[3];
+            directions[0] = 'E';
+            directions[1] = 'W';
+            directions[2] = 'N';
+        } else if (col == size - 1) {
+            directions = new char[3];
+            directions[0] = 'W';
+            directions[1] = 'S';
+            directions[2] = 'N';
+
+        } else {
+            directions = new char[4];
+            directions[0] = 'N';
+            directions[1] = 'E';
+            directions[2] = 'S';
+            directions[3] = 'W';
+        }
+        return directions;
+    }
+
+
+    public Cell getCell(int row, int col) {
+        return mazeGrid[row][col];
     }
 }
