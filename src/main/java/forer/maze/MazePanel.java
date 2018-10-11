@@ -15,7 +15,7 @@ public class MazePanel extends JComponent {
     public void paintComponent(Graphics g) {
 
         Graphics2D g2 = (Graphics2D) g;
-        BasicStroke stroke = new BasicStroke(500);
+        BasicStroke stroke = new BasicStroke(50);
         g2.setStroke(stroke);
         g2.setColor(Color.BLUE);
 
