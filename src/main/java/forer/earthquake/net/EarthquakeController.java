@@ -15,6 +15,7 @@ public class EarthquakeController {
 	private EarthquakeView view;
 	private USGSEarthquakeService service;
     private Disposable disposable;
+
 	@Inject
 	public EarthquakeController(EarthquakeView view, USGSEarthquakeService service) {
 		this.view = view;
