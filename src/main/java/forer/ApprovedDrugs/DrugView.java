@@ -3,6 +3,7 @@ package forer.ApprovedDrugs;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Singleton;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
@@ -11,23 +12,19 @@ import java.io.IOException;
 
 @Singleton
 public class DrugView extends JFrame {
-//    Retrofit retrofit = new Retrofit.Builder().baseUrl("https://www.ebi.ac.uk")
-//            .addConverterFactory(GsonConverterFactory.create()).build();
-//    DrugService service = retrofit.create(DrugService.class);
 
     private static JComboBox<String> drugIDs = new JComboBox<>();
 
     JComboBox<String> getDrugIDs() {
         return drugIDs;
     }
+
     private static JLabel name = new JLabel();
     private static JLabel formula = new JLabel();
     private static JLabel weight = new JLabel();
     private static JLabel species = new JLabel();
     private static JLabel rings = new JLabel();
     private static JLabel image = new JLabel();
-//
-//    DrugController controller = new DrugController(service, this);
 
     public DrugView() {
 

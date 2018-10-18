@@ -7,18 +7,16 @@ import java.io.IOException;
 import java.net.URL;
 import javax.swing.JLabel;
 import com.google.inject.Inject;
-import io.reactivex.Observable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import java.util.*;
-import java.util.concurrent.TimeUnit;
 
 public class DrugController {
 
     private DrugView view;
     private DrugService service;
-    DrugFeed feed;
     private Disposable disposable;
+    private DrugFeed feed = new DrugFeed();
 
     @Inject
     public DrugController(DrugService service, DrugView view) {
@@ -27,13 +25,12 @@ public class DrugController {
     }
 
     public void requestDrugFeed() {
-            disposable = Observable.interval(0,10000, TimeUnit.SECONDS)
-                    .flatMap(aLong -> service.getApprovedDrugs())
-                    .map(DrugFeed::getMolecules)
+            disposable = service.getApprovedDrugs()
+                    .map(t -> feed.getMolecules())
                     .subscribeOn(Schedulers.io())
                     .observeOn(Schedulers.single())
                     .subscribe(this :: setMolecules,
-                               throwable -> System.out.println("Error getting data"));
+                               throwable -> throwable.printStackTrace());
 
         }
 
