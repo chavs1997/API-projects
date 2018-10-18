@@ -20,25 +20,25 @@ public class MazePanel extends JComponent {
         g2.setStroke(stroke);
         g2.setColor(Color.BLUE);
         super.paintComponent(g);
-        int height = this.getHeight()/size;
+        int height = this.getHeight() / size;
 
         for (int column = 0; column < size; column++) {
             for (int row = 0; row < size; row++) {
                 Cell current = maze.getCell(column, row);
-                if(current.isWWall()) {
-                    g.drawLine((row+1)*height, column*height, (row+1)*height, column*height + height);
+                if (current.isWWall()) {
+                    g.drawLine((row + 1) * height, column * height, (row + 1) * height, column * height + height);
                 }
 
-                if(current.isNWall()){
-                    g.drawLine((row+1)*height, column*height,(row+1)*height + height, column*height);
+                if (current.isNWall()) {
+                    g.drawLine((row + 1) * height, column * height, (row + 1) * height + height, column * height);
                 }
 
-                if(current.isEWall()) {
-                    g.drawLine((row+1)*height + height, column*height, (row+1)*height + height, column*height + height);
+                if (current.isEWall()) {
+                    g.drawLine((row + 1) * height + height, column * height, (row + 1) * height + height, column * height + height);
                 }
 
-                if(current.isSWall()) {
-                    g.drawLine((row+1)*height, column*height + height, (row+1)*height + height, column*height +height);
+                if (current.isSWall()) {
+                    g.drawLine((row + 1) * height, column * height + height, (row + 1) * height + height, column * height + height);
                 }
 
             }

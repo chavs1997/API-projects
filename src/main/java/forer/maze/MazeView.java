@@ -5,7 +5,7 @@ import javax.swing.*;
 public class MazeView extends JFrame {
     public MazeView(int length) {
         setTitle("Maze");
-        setSize(1000,1000);
+        setSize(1000, 1000);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         MazePanel maze = new MazePanel(length);
@@ -29,10 +29,10 @@ public class MazeView extends JFrame {
             length = 15;
         } else if (selected.equals("20 x 20")) {
             length = 20;
-        }  else {
+        } else {
             length = 10;
         }
-            new MazeView(length).setVisible(true);
+        new MazeView(length).setVisible(true);
 
     }
 }

@@ -17,7 +17,7 @@ public class Maze {
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
                 mazeGrid[i][j] = new Cell(i, j);
-               }
+            }
         }
         generateMaze();
     }
@@ -76,16 +76,17 @@ public class Maze {
                         neighbor = mazeGrid[row - 1][col];
                         directions = null;
                     } else {
-                        if(directions.length > 1){
-                        char[] oldDirections = directions.clone();
-                        directions = new char[oldDirections.length - 1];
-                        int count = 0;
-                        for (char dir : oldDirections) {
-                            if (dir != 'N') {
-                                directions[count] = dir;
-                                count++;
+                        if (directions.length > 1) {
+                            char[] oldDirections = directions.clone();
+                            directions = new char[oldDirections.length - 1];
+                            int count = 0;
+                            for (char dir : oldDirections) {
+                                if (dir != 'N') {
+                                    directions[count] = dir;
+                                    count++;
+                                }
                             }
-                        }}else{
+                        } else {
                             directions = null;
                         }
                     }
@@ -95,7 +96,7 @@ public class Maze {
                         neighbor = mazeGrid[row][col + 1];
                         directions = null;
                     } else {
-                        if(directions.length > 1){
+                        if (directions.length > 1) {
                             char[] oldDirections = directions.clone();
                             directions = new char[oldDirections.length - 1];
                             int count = 0;
@@ -104,7 +105,8 @@ public class Maze {
                                     directions[count] = dir;
                                     count++;
                                 }
-                            }}else{
+                            }
+                        } else {
                             directions = null;
                         }
                     }
@@ -114,7 +116,7 @@ public class Maze {
                         neighbor = mazeGrid[row + 1][col];
                         directions = null;
                     } else {
-                        if(directions.length > 1){
+                        if (directions.length > 1) {
                             char[] oldDirections = directions.clone();
                             directions = new char[oldDirections.length - 1];
                             int count = 0;
@@ -123,7 +125,8 @@ public class Maze {
                                     directions[count] = dir;
                                     count++;
                                 }
-                            }}else{
+                            }
+                        } else {
                             directions = null;
                         }
                     }
@@ -133,7 +136,7 @@ public class Maze {
                         neighbor = mazeGrid[row][col - 1];
                         directions = null;
                     } else {
-                        if(directions.length > 1){
+                        if (directions.length > 1) {
                             char[] oldDirections = directions.clone();
                             directions = new char[oldDirections.length - 1];
                             int count = 0;
@@ -142,7 +145,8 @@ public class Maze {
                                     directions[count] = dir;
                                     count++;
                                 }
-                            }}else{
+                            }
+                        } else {
                             directions = null;
                         }
                     }
