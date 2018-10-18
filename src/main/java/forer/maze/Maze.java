@@ -17,11 +17,7 @@ public class Maze {
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
                 mazeGrid[i][j] = new Cell(i, j);
-                mazeGrid[i][j].setEWall(true);
-                mazeGrid[i][j].setNWall(true);
-                mazeGrid[i][j].setSWall(true);
-                mazeGrid[i][j].setWWall(true);
-            }
+               }
         }
         generateMaze();
     }

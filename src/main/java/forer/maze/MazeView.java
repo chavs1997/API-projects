@@ -35,27 +35,27 @@ public class MazeView extends JFrame {
 //            length = 10;
 //        }
 
-       // new MazeView().setVisible(true);
+       new MazeView().setVisible(true);
 
-        Maze maze = new Maze(7);
-        for(int i = 0;i < 7; i++){
-            for(int j = 0; j < 7; j++){
-                if (maze.getCell(i, j).isWWall()) {
-                    System.out.print("|");
-                }
-                if (maze.getCell(i, j).isNWall()) {
-                    System.out.print(" ^ ");
-                }
-                if (maze.getCell(i, j).isEWall()) {
-                    System.out.print("|");
-                }
-
-                if (maze.getCell(i, j).isSWall()) {
-                    System.out.print("_");
-                }
-
-            }
-            System.out.println();
-        }
+//        Maze maze = new Maze(7);
+//        for(int i = 0;i < 7; i++){
+//            for(int j = 0; j < 7; j++){
+//                if (maze.getCell(i, j).isWWall()) {
+//                    System.out.print("|");
+//                }
+//                if (maze.getCell(i, j).isNWall()) {
+//                    System.out.print(" ^ ");
+//                }
+//                if (maze.getCell(i, j).isEWall()) {
+//                    System.out.print("|");
+//                }
+//
+//                if (maze.getCell(i, j).isSWall()) {
+//                    System.out.print("_");
+//                }
+//
+////            }
+//            System.out.println();
+//        }
     }
 }

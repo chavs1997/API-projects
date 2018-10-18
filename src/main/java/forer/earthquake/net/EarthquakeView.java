@@ -1,15 +1,10 @@
 package forer.earthquake.net;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.*;
-
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Singleton;
-import javafx.scene.layout.BorderWidths;
-
 
 @SuppressWarnings("serial")
 @Singleton

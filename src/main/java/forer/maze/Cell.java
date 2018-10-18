@@ -13,6 +13,10 @@ public class Cell {
     public Cell(int row, int col){
         this.row = row;
         this.col = col;
+        NWall = true;
+        EWall = true;
+        SWall = true;
+        WWall = true;
     }
     public int getRow() {
         return row;
