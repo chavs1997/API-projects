@@ -10,7 +10,7 @@ public class Window extends JFrame{
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         Canvas paintCanvas = new Canvas();
         setLayout(new BorderLayout());
-        add(paintCanvas);
+        add(paintCanvas, BorderLayout.CENTER);
     }
 
     public static void main(String [] args){
