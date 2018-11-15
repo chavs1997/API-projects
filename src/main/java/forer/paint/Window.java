@@ -11,6 +11,15 @@ public class Window extends JFrame {
         Canvas paintCanvas = new Canvas();
         setLayout(new BorderLayout());
         add(paintCanvas, BorderLayout.CENTER);
+        JPanel topPanel = new JPanel();
+        JButton button = new JButton("Choose Color!");
+        button.addActionListener(e -> paintCanvas.setColor(JColorChooser.showDialog(paintCanvas,
+                "Choose a color", new Color(100, 1, 94))));
+        topPanel.add(button);
+        JButton recButton = new JButton("Rectangle");
+        recButton.addActionListener(e -> paintCanvas.setShape(true));
+        topPanel.add(recButton);
+        add(topPanel, BorderLayout.NORTH);
     }
 
     public static void main(String[] args) {

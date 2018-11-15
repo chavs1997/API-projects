@@ -1,5 +1,6 @@
 package forer.paint;
 
+import forer.paint.Shapes.Shape;
 
 import javax.swing.*;
 import java.awt.*;
@@ -8,13 +9,14 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 
-
 public class Canvas extends JComponent {
-    int counter = 0;
-    ArrayList<ArrayList<Point>> points = new ArrayList();
+    private boolean shape = false;
+    private int shapeCounter = 0;
+    private Color mainColor;
+    private ArrayList<ArrayList<Shape>> shapePoints = new ArrayList();
 
     public Canvas() {
-        points.add(new ArrayList<>());
+        shapePoints.add(new ArrayList<>());
         setBackground(Color.WHITE);
         addMouseListener(new MouseListener() {
             @Override
@@ -29,8 +31,8 @@ public class Canvas extends JComponent {
 
             @Override
             public void mouseReleased(MouseEvent e) {
-                points.add(new ArrayList<>());
-                counter++;
+                shapePoints.add(new ArrayList<>());
+                shapeCounter++;
             }
 
             @Override
@@ -47,8 +49,15 @@ public class Canvas extends JComponent {
 
             @Override
             public void mouseDragged(MouseEvent e) {
-                points.get(counter).add(new Point(e.getX(), e.getY()));
-                repaint();
+                if (!shape) {
+                    if (mainColor == null) {
+                        mainColor = new Color(100, 1, 94);
+                    }
+                    Shape shape = new Shape(new Point(e.getX(), e.getY(), mainColor), Shape.Type.Line);
+                    shapePoints.get(shapeCounter).add(shape);
+                    repaint();
+                }
+
             }
 
             @Override
@@ -67,16 +76,28 @@ public class Canvas extends JComponent {
         Graphics2D g2 = (Graphics2D) g;
         BasicStroke stroke = new BasicStroke(2);
         g2.setStroke(stroke);
-        g2.setColor(Color.BLUE);
+
+        g2.setColor(new Color(255, 187, 139));
         g2.fillRect(0, 0, getWidth(), getHeight());
-        g2.setColor(Color.WHITE);
-        for (int i = 0; i < points.size(); i++) {
-            for (int j = 0; j < points.get(i).size() - 1; j++) {
-                g.drawLine(points.get(i).get(j).getX(), points.get(i).get(j).getY(),
-                        points.get(i).get(j + 1).getX(), points.get(i).get(j + 1).getY());
+
+        for (int i = 0; i < shapePoints.size(); i++) {
+            for (int j = 0; j < shapePoints.get(i).size() - 1; j++) {
+                Point currentPoint = shapePoints.get(i).get(j).getStartPoint();
+                g2.setColor(currentPoint.getColor());
+                Point nextPoint = shapePoints.get(i).get(j + 1).getStartPoint();
+                g2.drawLine(currentPoint.getX(), currentPoint.getY(),
+                        nextPoint.getX(), nextPoint.getY());
             }
+
         }
     }
 
 
+    public void setColor(Color color) {
+        mainColor = color;
+    }
+
+    public void setShape(boolean shape) {
+        this.shape = shape;
+    }
 }

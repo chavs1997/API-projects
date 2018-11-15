@@ -7,6 +7,7 @@ import java.awt.event.KeyEvent;
 public class MazeView extends JFrame {
 
     MazePanel maze;
+
     public MazeView(int length) {
         setTitle("Maze");
         setSize(1000, 1000);
@@ -35,7 +36,7 @@ public class MazeView extends JFrame {
     }
 
 
-            public static void main(String[] args) {
+    public static void main(String[] args) {
 
         JDialog.setDefaultLookAndFeelDecorated(true);
         Object[] selectionValues = {"5 x 5", "10 x 10", "15 x 15", "20 x 20"};
