@@ -25,7 +25,7 @@ public class Canvas extends JComponent {
 
             @Override
             public void mousePressed(MouseEvent e) {
-                Shape shape = new Shape(currentType);
+                Shape shape = new Shape(currentType, mainColor);
                 shapes.add(shape);
             }
 
@@ -52,7 +52,7 @@ public class Canvas extends JComponent {
                     mainColor = new Color(100, 1, 94);
                 }
 
-                shapes.get(shapeCounter).getPoints().add(new Point(e.getX(), e.getY(), mainColor));
+                shapes.get(shapeCounter).getPoints().add(new Point(e.getX(), e.getY()));
                 repaint();
             }
 

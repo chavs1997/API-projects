@@ -9,10 +9,9 @@ import java.io.File;
 import java.io.IOException;
 
 public class HeartTool implements Tool {
+
     @Override
     public void onDrag(Graphics g, Point point, Point nextPoint) {
-        g.setColor(point.getColor());
-
         int px = Math.min(point.getX(),nextPoint.getX());
         int py = Math.min(point.getY(),nextPoint.getY());
         int pw=Math.abs(point.getX()-nextPoint.getX());
