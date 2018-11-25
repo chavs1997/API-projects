@@ -2,41 +2,39 @@ package forer.paint.Shapes;
 
 import forer.paint.Point;
 
+import java.awt.*;
+import java.util.ArrayList;
+
 public class Shape {
-     private Point startPoint;
-     private Point endPoint;
-     public enum Type{
-         Rectangle, Circle, Line
-     }
+    private ArrayList<Point> points = new ArrayList();
 
-     private Type type;
+    public void paint(Graphics g) {
+        if(type == Type.Line) {
+            PencilTool tool = new PencilTool();
+            for (int j = 0; j < this.getPoints().size() - 1; j++) {
+                tool.onDrag(g, this.getPoints().get(j), this.getPoints().get(j + 1));
 
-    public Shape(Point startPoint, Type type) {
-        this.startPoint = startPoint;
+            }
+        }
+        if(type == Type.Rectangle){
+            RectangleTool tool = new RectangleTool();
+            for(int j = 0; j < this.getPoints().size()-1; j++){
+                tool.onDrag(g,this.getPoints().get(0), this.getPoints().get(j + 1) );
+            }
+        }
+    }
+
+    public enum Type {
+        Rectangle, Circle, Line
+    }
+
+    private Type type;
+
+    public Shape(Type type) {
         this.type = type;
     }
 
-    public Type getType() {
-        return type;
-    }
-
-    public void setType(Type type) {
-        this.type = type;
-    }
-
-    public Point getStartPoint() {
-        return startPoint;
-    }
-
-    public void setStartPoint(Point startPoint) {
-        this.startPoint = startPoint;
-    }
-
-    public Point getEndPoint() {
-        return endPoint;
-    }
-
-    public void setEndPoint(Point endPoint) {
-        this.endPoint = endPoint;
+    public ArrayList<Point> getPoints() {
+        return points;
     }
 }

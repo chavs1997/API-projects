@@ -1,5 +1,7 @@
 package forer.paint;
 
+import forer.paint.Shapes.Shape;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -12,12 +14,15 @@ public class Window extends JFrame {
         setLayout(new BorderLayout());
         add(paintCanvas, BorderLayout.CENTER);
         JPanel topPanel = new JPanel();
-        JButton button = new JButton("Choose Color!");
-        button.addActionListener(e -> paintCanvas.setColor(JColorChooser.showDialog(paintCanvas,
+        JButton colorButton = new JButton("Choose Color!");
+        colorButton.addActionListener(e -> paintCanvas.setColor(JColorChooser.showDialog(paintCanvas,
                 "Choose a color", new Color(100, 1, 94))));
-        topPanel.add(button);
+        topPanel.add(colorButton);
+        JButton pencilButton = new JButton("Pencil");
+        pencilButton.addActionListener(e -> paintCanvas.setCurrentType(Shape.Type.Line));
+        topPanel.add(pencilButton);
         JButton recButton = new JButton("Rectangle");
-        recButton.addActionListener(e -> paintCanvas.setShape(true));
+        recButton.addActionListener(e -> paintCanvas.setCurrentType(Shape.Type.Rectangle));
         topPanel.add(recButton);
         add(topPanel, BorderLayout.NORTH);
     }
