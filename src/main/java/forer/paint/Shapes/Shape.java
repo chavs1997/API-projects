@@ -18,9 +18,8 @@ public class Shape {
         }
         if(type == Type.Rectangle){
             RectangleTool tool = new RectangleTool();
-            for(int j = 0; j < this.getPoints().size()-1; j++){
-                tool.onDrag(g,this.getPoints().get(0), this.getPoints().get(j + 1) );
-            }
+            tool.onDrag(g,this.getPoints().get(0), this.getPoints().get(this.getPoints().size() - 1));
+
         }
     }
 
