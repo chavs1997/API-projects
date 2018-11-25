@@ -21,10 +21,16 @@ public class Shape {
             tool.onDrag(g,this.getPoints().get(0), this.getPoints().get(this.getPoints().size() - 1));
 
         }
+
+        if(type == Type.Heart){
+            HeartTool tool = new HeartTool();
+            tool.onDrag(g, this.getPoints().get(0), this.getPoints().get(this.getPoints().size()-1));
+
+        }
     }
 
     public enum Type {
-        Rectangle, Circle, Line
+        Rectangle, Heart, Line
     }
 
     private Type type;

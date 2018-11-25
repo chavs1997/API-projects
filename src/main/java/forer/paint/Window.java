@@ -24,6 +24,10 @@ public class Window extends JFrame {
         JButton recButton = new JButton("Rectangle");
         recButton.addActionListener(e -> paintCanvas.setCurrentType(Shape.Type.Rectangle));
         topPanel.add(recButton);
+
+        JButton heartButton = new JButton("Heart");
+        heartButton.addActionListener(e -> paintCanvas.setCurrentType(Shape.Type.Heart));
+        topPanel.add(heartButton);
         add(topPanel, BorderLayout.NORTH);
     }
 
