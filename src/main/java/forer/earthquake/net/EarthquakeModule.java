@@ -6,7 +6,7 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class EarthquakeModule  extends AbstractModule{
-	
+
 	@Override
 	protected void configure() {
 		super.configure();
@@ -15,7 +15,7 @@ public class EarthquakeModule  extends AbstractModule{
 				.addConverterFactory(GsonConverterFactory.create())
 				.addCallAdapterFactory(RxJava2CallAdapterFactory.create())
 				.build();
-		
+
 		USGSEarthquakeService service = retrofit.create(USGSEarthquakeService.class);
 		bind(USGSEarthquakeService.class).toInstance(service);
 	}
