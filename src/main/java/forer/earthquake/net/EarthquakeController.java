@@ -22,6 +22,43 @@ public class EarthquakeController {
 	}
 
 	public void refreshData() {
+<<<<<<< HEAD
+		requestEarthquakeFeed(service.getAllDay(), view.getDayMagLabel(), view.getDayLocLabel());
+	}
+
+	/*public void requestDay() {
+		requestEarthquakeFeed(service.getAllDay(), view.getDayMagLabel(), view.getDayLocLabel());
+	}
+
+	public void requestWeek() {
+		requestEarthquakeFeed(service.getAllWeek(), view.getWeekMagLabel(), view.getWeekLocLabel());
+	}
+
+	public void requestMonth() {
+
+		requestEarthquakeFeed(service.getAllMonth(), view.getMonthMagLabel(), view.getMonthLocLabel());
+	}*/
+
+	public void requestEarthquakeFeed(Call<EarthquakeFeed> call, JLabel [] mag, JLabel [] loc) {
+		call.enqueue(new Callback<EarthquakeFeed>() {
+
+			@Override
+			public void onFailure(Call<EarthquakeFeed> call, Throwable t) {
+				t.printStackTrace();
+			}
+
+			@Override
+			public void onResponse(Call<EarthquakeFeed> call, Response<EarthquakeFeed> response) {
+				EarthquakeFeed feed = response.body();
+				List<Earthquake> earthquakes = feed.getFeatures()
+						.stream()
+						.filter(earthquake -> earthquake.getProperties().getMag() >= 3)
+						.sorted(Comparator.comparing(Earthquake :: getMagnitude).reversed())
+						.limit(5)
+						.collect(Collectors.toList());
+				showTopFive(earthquakes, mag, loc);
+			}
+=======
         disposable = Observable.interval(0,30, TimeUnit.SECONDS)
                 .flatMap(aLong -> service.getAllDay())
                 .map(EarthquakeFeed::getFeatures)
@@ -29,6 +66,7 @@ public class EarthquakeController {
                 .observeOn(Schedulers.single())
                 .subscribe(this :: setEarthquakes,
                         throwable -> System.out.println("Error getting data"));
+>>>>>>> master
 
 	}
 
