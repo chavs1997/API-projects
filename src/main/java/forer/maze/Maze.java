@@ -8,7 +8,7 @@ public class Maze {
     public Cell[][] mazeGrid;
     public Stack<Cell> visitedCells = new Stack();
     Random rand = new Random();
-    int size;
+    private int size;
 
 
     public Maze(int size) {
@@ -155,7 +155,6 @@ public class Maze {
             }
 
         }
-<<<<<<< HEAD
         return neighbor;
     }
 
@@ -213,9 +212,5 @@ public class Maze {
 
     public Cell getCell(int row, int col) {
         return mazeGrid[row][col];
-=======
-        while (chosenNeighbor[0] < 0 || chosenNeighbor[1] < 0 || chosenNeighbor[0] >= length || chosenNeighbor[1] >= length);
-        return chosenNeighbor;
->>>>>>> master
     }
 }
