@@ -5,7 +5,7 @@ public class Girl {
     private int row;
     private int col;
 
-    public Girl(int row, int col){
+    public Girl(int row, int col) {
         this.row = row;
         this.col = col;
     }

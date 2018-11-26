@@ -8,7 +8,7 @@ public class Maze {
     public Cell[][] mazeGrid;
     public Stack<Cell> visitedCells = new Stack();
     Random rand = new Random();
-    int size;
+    private int size;
 
 
     public Maze(int size) {
