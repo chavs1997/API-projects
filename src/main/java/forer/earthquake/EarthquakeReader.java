@@ -10,7 +10,7 @@ import com.google.gson.Gson;
 public class EarthquakeReader {
 	public static void main(String args[]) throws FileNotFoundException {
 		Gson gson = new Gson();
-		BufferedReader in = new BufferedReader(new FileReader(new File("src/forer/earthquake/all_month.geojson")));
+		BufferedReader in = new BufferedReader(new FileReader(new File("src/main/java/forer/earthquake/all_month.geojson")));
 		EarthquakeFeed feed = gson.fromJson(in, EarthquakeFeed.class);
 		int count = 0;
 		for(int i = 0; i < feed.getFeatures().size(); i++) {
