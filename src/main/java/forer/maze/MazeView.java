@@ -1,19 +1,19 @@
 package forer.maze;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 public class MazeView extends JFrame {
 
     MazePanel maze;
-
     public MazeView(int length) {
         setTitle("Maze");
         setSize(1000, 1000);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-
         maze = new MazePanel(length);
+        maze.setBackground(Color.WHITE);
         add(maze);
         addKeyListener(new MyKeyAdapter());
     }
@@ -25,13 +25,28 @@ public class MazeView extends JFrame {
 
             if (keyEvent.getKeyCode() == KeyEvent.VK_LEFT) {
                 maze.directionLeft();
+                repaint();
+                checkIfDone();
             } else if (keyEvent.getKeyCode() == KeyEvent.VK_RIGHT) {
                 maze.directionRight();
+                repaint();
+                checkIfDone();
             } else if (keyEvent.getKeyCode() == KeyEvent.VK_UP) {
                 maze.directionUp();
+                repaint();
+                checkIfDone();
             } else if (keyEvent.getKeyCode() == KeyEvent.VK_DOWN) {
                 maze.directionDown();
+                repaint();
+                checkIfDone();
             }
+        }
+    }
+
+    private void checkIfDone() {
+        if(maze.getGirl().getRow() == maze.getLength() - 1 && maze.getGirl().getColumn() == maze.getLength() - 1){
+            System.out.println("You won!!!");
+            System.exit(0);
         }
     }
 

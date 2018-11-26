@@ -17,4 +17,12 @@ public class Girl {
     public int getRow() {
         return row;
     }
+
+    public void setRow(int row) {
+        this.row = row;
+    }
+
+    public void setColumn(int col) {
+        this.col = col;
+    }
 }
