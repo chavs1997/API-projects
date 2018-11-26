@@ -3,15 +3,11 @@ package forer.maze;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-<<<<<<< HEAD
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
 public class MazePanel extends JComponent {
-=======
-public class MazePanel extends JPanel {
->>>>>>> master
 
     private Maze maze;
     private int length;
