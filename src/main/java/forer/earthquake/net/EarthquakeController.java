@@ -15,6 +15,7 @@ public class EarthquakeController {
 	private EarthquakeView view;
 	private USGSEarthquakeService service;
     private Disposable disposable;
+
 	@Inject
 	public EarthquakeController(EarthquakeView view, USGSEarthquakeService service) {
 		this.view = view;
@@ -24,11 +25,11 @@ public class EarthquakeController {
 	public void refreshData() {
         disposable = Observable.interval(0,30, TimeUnit.SECONDS)
                 .flatMap(aLong -> service.getAllDay())
-                .map(EarthquakeFeed::getFeatures)
+				.map(EarthquakeFeed::getFeatures)
                 .subscribeOn(Schedulers.io())
                 .observeOn(Schedulers.single())
                 .subscribe(this :: setEarthquakes,
-                        throwable -> System.out.println("Error getting data"));
+                        throwable -> throwable.printStackTrace());
 
 	}
 
