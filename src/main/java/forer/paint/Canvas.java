@@ -86,4 +86,12 @@ public class Canvas extends JComponent {
     public void setCurrentType(Shape.Type currentType) {
         this.currentType = currentType;
     }
+
+    public void undo() {
+        if (shapes.size() > 0) {
+            shapes.remove(shapes.size() - 1);
+            shapeCounter--;
+            repaint();
+        }
+    }
 }

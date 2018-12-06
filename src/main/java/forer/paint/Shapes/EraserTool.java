@@ -4,7 +4,7 @@ import forer.paint.Point;
 
 import java.awt.*;
 
-public class EraserTool implements Tool{
+public class EraserTool implements Tool {
 
 
     private int width = 15;
@@ -18,6 +18,7 @@ public class EraserTool implements Tool{
         g2.drawLine(currentPoint.getX(), currentPoint.getY(),
                 nextPoint.getX(), nextPoint.getY());
     }
+
     public void setWidth(int width) {
         this.width = width;
     }

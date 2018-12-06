@@ -17,7 +17,12 @@ public class Window extends JFrame {
         Canvas paintCanvas = new Canvas();
         setLayout(new BorderLayout());
         add(paintCanvas, BorderLayout.CENTER);
+
         JPanel topPanel = new JPanel();
+
+        JButton undoButton = new JButton("Undo");
+        undoButton.addActionListener(e -> paintCanvas.undo());
+        topPanel.add(undoButton);
 
         JButton colorButton = new JButton("Choose Color!");
         colorButton.addActionListener(e -> paintCanvas.setColor(JColorChooser.showDialog(paintCanvas,
@@ -32,6 +37,10 @@ public class Window extends JFrame {
         recButton.addActionListener(e -> paintCanvas.setCurrentType(Shape.Type.Rectangle));
         topPanel.add(recButton);
 
+        JButton fillRecButton = new JButton("Filled Rectangle");
+        fillRecButton.addActionListener(e -> paintCanvas.setCurrentType(Shape.Type.FilledRectangle));
+        topPanel.add(fillRecButton);
+
         JButton heartButton = new JButton("Heart");
         heartButton.addActionListener(e -> paintCanvas.setCurrentType(Shape.Type.Heart));
         topPanel.add(heartButton);
@@ -41,6 +50,8 @@ public class Window extends JFrame {
         eraser.setIcon(new ImageIcon(eraseIcon));
         eraser.addActionListener(e -> paintCanvas.setCurrentType(Shape.Type.Eraser));
         topPanel.add(eraser);
+
+
         add(topPanel, BorderLayout.NORTH);
     }
 
