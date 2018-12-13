@@ -1,11 +1,10 @@
 package forer.paint.Shapes;
 
-import forer.paint.Point;
-
 import java.awt.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Shape {
+public class Shape implements Serializable {
     private ArrayList<Point> points = new ArrayList();
 
     private Color col;
@@ -64,8 +63,5 @@ public class Shape {
 
     private Type type;
 
-    public Shape(Type type) {
-        this.type = type;
-    }
 
 }

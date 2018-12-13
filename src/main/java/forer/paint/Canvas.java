@@ -1,5 +1,6 @@
 package forer.paint;
 
+import forer.paint.Shapes.Point;
 import forer.paint.Shapes.Shape;
 
 import javax.imageio.ImageIO;
@@ -121,12 +122,15 @@ public class Canvas extends JComponent {
         this.userFilePNG = userFilePNG;
     }
 
+
+    public void setUserFileShapes(String userFileShapes) {
+        this.userFileShapes = userFileShapes;
+    }
+
     public void saveAsShapes() throws IOException {
         FileOutputStream fileOutputStream = new FileOutputStream(userFileShapes);
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
-
         objectOutputStream.writeObject(shapes);
-
         objectOutputStream.close();
     }
 
@@ -137,11 +141,9 @@ public class Canvas extends JComponent {
         Object shape = objectInputStream.readObject();
         shapes.clear();
         shapes.addAll((ArrayList<Shape>) shape);
+        shapeCounter = shapes.size();
         objectInputStream.close();
         repaint();
     }
 
-    public void setUserFileShapes(String userFileShapes) {
-        this.userFileShapes = userFileShapes;
-    }
 }

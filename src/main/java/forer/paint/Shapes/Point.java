@@ -1,7 +1,9 @@
-package forer.paint;
+package forer.paint.Shapes;
 
 
-public class Point {
+import java.io.Serializable;
+
+public class Point implements Serializable {
 
     private int x;
     private int y;
@@ -18,8 +20,6 @@ public class Point {
     public int getY() {
         return y;
     }
-
-
 
 
 }

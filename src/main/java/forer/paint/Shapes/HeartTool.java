@@ -1,7 +1,5 @@
 package forer.paint.Shapes;
 
-import forer.paint.Point;
-
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -18,7 +16,7 @@ public class HeartTool implements Tool {
         int ph = Math.abs(point.getY() - nextPoint.getY());
 
         try {
-            BufferedImage heart = ImageIO.read(new File("heartIcon.png"));
+            BufferedImage heart = ImageIO.read(new File("src/resources/heartIcon.png"));
             g.drawImage(heart, px, py, pw, ph, new Color(255, 187, 139), null);
         } catch (IOException e) {
             e.printStackTrace();

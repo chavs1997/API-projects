@@ -1,7 +1,5 @@
 package forer.paint.Shapes;
 
-import forer.paint.Point;
-
 import java.awt.*;
 
 public class PencilTool implements Tool {

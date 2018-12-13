@@ -1,11 +1,14 @@
 package forer.paint;
 
 import forer.paint.Shapes.Shape;
+
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 
 public class Window extends JFrame {
+    private final String SHAPES_PATH = "src/main/java/forer/paint/SavedPaintShapes/";
+
     private Window() throws IOException {
         setTitle("Paint");
         setSize(800, 600);
@@ -15,6 +18,53 @@ public class Window extends JFrame {
         setLayout(new BorderLayout());
         add(paintCanvas, BorderLayout.CENTER);
         JPanel topPanel = new JPanel();
+
+        JButton saveAsPNG = bMaker.generateButton("Save as PNG");
+        saveAsPNG.addActionListener(actionEvent ->
+        {
+            try {
+                JFileChooser fileChooser = new JFileChooser();
+                fileChooser.showSaveDialog(this);
+                paintCanvas.setUserFilePNG(fileChooser.getSelectedFile());
+                paintCanvas.saveAsPNG();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+        topPanel.add(saveAsPNG);
+
+        JButton saveAsShapes = bMaker.generateButton("Save as Shapes");
+        saveAsShapes.addActionListener(actionEvent ->
+        {
+            String saveAsShapesFile = JOptionPane.showInputDialog("Please enter a file name: ");
+            if (saveAsShapesFile != null) {
+                paintCanvas.setUserFileShapes(SHAPES_PATH + saveAsShapesFile + ".ser");
+                try {
+                    paintCanvas.saveAsShapes();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        topPanel.add(saveAsShapes);
+
+        JButton openShapes = bMaker.generateButton("Open as Shapes");
+        openShapes.addActionListener(actionEvent ->
+        {
+            String openAsShapesFile = JOptionPane.showInputDialog("Please enter the file name: ");
+            if (openAsShapesFile != null) {
+                paintCanvas.setUserFileShapes(SHAPES_PATH + openAsShapesFile + ".ser");
+                try {
+                    paintCanvas.openAsShapes();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        topPanel.add(openShapes);
 
         JButton undoButton = bMaker.generateButton("Undo");
         undoButton.addActionListener(e -> paintCanvas.undo());
