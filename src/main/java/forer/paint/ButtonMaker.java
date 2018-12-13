@@ -52,7 +52,7 @@ class ButtonMaker {
                 typeButton.setIcon(new ImageIcon(savePNGIcon));
                 break;
             case "Save as Shapes":
-                Image saveTextIcon = ImageIO.read(new File("src/resources/text-icon.png")).getScaledInstance(20, 20, Image.SCALE_DEFAULT);
+                Image saveTextIcon = ImageIO.read(new File("src/resources/save-as.png")).getScaledInstance(20, 20, Image.SCALE_DEFAULT);
                 typeButton.setIcon(new ImageIcon(saveTextIcon));
                 break;
             case "Open as Shapes":

@@ -38,7 +38,7 @@ public class Window extends JFrame {
         {
             String saveAsShapesFile = JOptionPane.showInputDialog("Please enter a file name: ");
             if (saveAsShapesFile != null) {
-                paintCanvas.setUserFileShapes(SHAPES_PATH + saveAsShapesFile + ".ser");
+                paintCanvas.setUserFileShapes(SHAPES_PATH + saveAsShapesFile + ".bts");
                 try {
                     paintCanvas.saveAsShapes();
                 } catch (IOException e) {
@@ -53,7 +53,7 @@ public class Window extends JFrame {
         {
             String openAsShapesFile = JOptionPane.showInputDialog("Please enter the file name: ");
             if (openAsShapesFile != null) {
-                paintCanvas.setUserFileShapes(SHAPES_PATH + openAsShapesFile + ".ser");
+                paintCanvas.setUserFileShapes(SHAPES_PATH + openAsShapesFile + ".bts");
                 try {
                     paintCanvas.openAsShapes();
                 } catch (IOException e) {
