@@ -2,11 +2,14 @@ package forer.paint;
 
 import forer.paint.Shapes.Shape;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.awt.image.BufferedImage;
+import java.io.*;
 import java.util.ArrayList;
 
 public class Canvas extends JComponent {
@@ -14,6 +17,8 @@ public class Canvas extends JComponent {
     private int shapeCounter = 0;
     private Color mainColor;
     private ArrayList<Shape> shapes = new ArrayList();
+    private File userFilePNG;
+    private String userFileShapes;
 
     public Canvas() {
         setBackground(Color.WHITE);
@@ -70,12 +75,15 @@ public class Canvas extends JComponent {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.setColor(new Color(255, 187, 139));
-        g.fillRect(0, 0, getWidth(), getHeight());
-
+        drawBackground(g);
         for (Shape shape : shapes) {
             shape.paint(g);
         }
+    }
+
+    private void drawBackground(Graphics g) {
+        g.setColor(new Color(255, 187, 139));
+        g.fillRect(0, 0, getWidth(), getHeight());
     }
 
 
@@ -93,5 +101,47 @@ public class Canvas extends JComponent {
             shapeCounter--;
             repaint();
         }
+    }
+
+    public void saveAsPNG() throws IOException {
+        BufferedImage bufferedImage = new BufferedImage(this.getWidth(), this.getHeight(), BufferedImage.TYPE_INT_RGB);
+        Graphics2D g2d = bufferedImage.createGraphics();
+
+        drawBackground(g2d);
+        for (Shape shape : shapes) {
+            g2d.setColor(shape.getColor());
+            shape.paint(g2d);
+        }
+
+        File filePNG = new File(userFilePNG.getAbsolutePath() + ".png");
+        ImageIO.write(bufferedImage, "png", filePNG);
+    }
+
+    public void setUserFilePNG(File userFilePNG) {
+        this.userFilePNG = userFilePNG;
+    }
+
+    public void saveAsShapes() throws IOException {
+        FileOutputStream fileOutputStream = new FileOutputStream(userFileShapes);
+        ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+
+        objectOutputStream.writeObject(shapes);
+
+        objectOutputStream.close();
+    }
+
+    public void openAsShapes() throws IOException, ClassNotFoundException {
+        FileInputStream fileInputStream = new FileInputStream(userFileShapes);
+        ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+
+        Object shape = objectInputStream.readObject();
+        shapes.clear();
+        shapes.addAll((ArrayList<Shape>) shape);
+        objectInputStream.close();
+        repaint();
+    }
+
+    public void setUserFileShapes(String userFileShapes) {
+        this.userFileShapes = userFileShapes;
     }
 }

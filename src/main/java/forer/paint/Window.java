@@ -1,56 +1,49 @@
 package forer.paint;
 
 import forer.paint.Shapes.Shape;
-
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 
 public class Window extends JFrame {
-    public Window() throws IOException {
+    private Window() throws IOException {
         setTitle("Paint");
         setSize(800, 600);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         Canvas paintCanvas = new Canvas();
+        ButtonMaker bMaker = new ButtonMaker();
         setLayout(new BorderLayout());
         add(paintCanvas, BorderLayout.CENTER);
-
         JPanel topPanel = new JPanel();
 
-        JButton undoButton = new JButton("Undo");
+        JButton undoButton = bMaker.generateButton("Undo");
         undoButton.addActionListener(e -> paintCanvas.undo());
         topPanel.add(undoButton);
 
-        JButton colorButton = new JButton("Choose Color!");
+        JButton colorButton = bMaker.generateButton("Color");
         colorButton.addActionListener(e -> paintCanvas.setColor(JColorChooser.showDialog(paintCanvas,
                 "Choose a color", new Color(100, 1, 94))));
         topPanel.add(colorButton);
 
-        JButton pencilButton = new JButton("Pencil");
+        JButton pencilButton = bMaker.generateButton("Pencil");
         pencilButton.addActionListener(e -> paintCanvas.setCurrentType(Shape.Type.Line));
         topPanel.add(pencilButton);
 
-        JButton recButton = new JButton("Rectangle");
+        JButton recButton = bMaker.generateButton("Rectangle");
         recButton.addActionListener(e -> paintCanvas.setCurrentType(Shape.Type.Rectangle));
         topPanel.add(recButton);
 
-        JButton fillRecButton = new JButton("Filled Rectangle");
+        JButton fillRecButton = bMaker.generateButton("Filled Rectangle");
         fillRecButton.addActionListener(e -> paintCanvas.setCurrentType(Shape.Type.FilledRectangle));
         topPanel.add(fillRecButton);
 
-        JButton heartButton = new JButton("Heart");
+        JButton heartButton = bMaker.generateButton("Heart");
         heartButton.addActionListener(e -> paintCanvas.setCurrentType(Shape.Type.Heart));
         topPanel.add(heartButton);
 
-        JButton eraser = new JButton();
-        Image eraseIcon = ImageIO.read(new File("eraser.png")).getScaledInstance(20,20, Image.SCALE_DEFAULT);
-        eraser.setIcon(new ImageIcon(eraseIcon));
+        JButton eraser = bMaker.generateButton("Eraser");
         eraser.addActionListener(e -> paintCanvas.setCurrentType(Shape.Type.Eraser));
         topPanel.add(eraser);
-
 
         add(topPanel, BorderLayout.NORTH);
     }

@@ -15,6 +15,10 @@ public class Shape {
         this.type = type;
     }
 
+    public Color getColor() {
+        return col;
+    }
+
     public void paint(Graphics g) {
         if (type == Type.Line) {
             PencilTool tool = new PencilTool(col);
